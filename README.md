@@ -1,1 +1,1 @@
-# hw4-2_maxflow_mincut
+# HW4 maxflow_mincut

@@ -125,10 +125,10 @@ void updateResidual(int** residual_graph, string aug_path, int bottle_neck){
 }
 
 // No need for backward path
-void rmBackwardPath(int** residual_graph, int v_count){
+void rmBackwardPath(int** graph, int** residual_graph, int v_count){
 	for(int i=0;i<v_count;i++){
 		for(int j=0;j<v_count;j++){
-			if(i>=j)residual_graph[i][j]=0; // recover
+			if(graph[i][j]>0)residual_graph[j][i]=0;
 		}
 	}
 	return;
@@ -164,10 +164,10 @@ void maxFlow_minCut(){
 	string aug_path=findAugmentedPath(v_count, residual_graph);
 	while(aug_path!="failed: no augmented path"){
 		int bottle_neck=findBottleNeck(residual_graph, aug_path);
-		updateResidual(residual_graph, aug_path, bottle_neck);
+		updateResidual(residual_graph, aug_path, bottle_neck);		
 		aug_path=findAugmentedPath(v_count, residual_graph);
-	}
-	rmBackwardPath(residual_graph, v_count);
+	}	
+	rmBackwardPath(graph, residual_graph, v_count);
 	printResult(graph, residual_graph, v_count);
 	/* for(int i=0;i<v_count;i++){
 		for(int j=0;j<v_count;j++){

@@ -182,7 +182,10 @@ void printResult(int** graph, int** res_graph, int v_count){
 		for(int j=0;j<v_count;j++){
 			if(graph[i][j]!=0){
 				int flow=graph[i][j]-res_graph[i][j];
-				cout<<"<"<<i<<","<<j<<"> ";
+				cout<<"<"<<i<<","<<j<<">";
+				cout<<"   ";
+				if(i>9)cout<<"\b";
+				if(j>9)cout<<"\b";
 				cout<<flow;
 				// print out beautiful appearance
 				if(flow<10)cout<<"    ";
